@@ -1,0 +1,64 @@
+<!doctype html>
+<!-- Dashboard Prompt Navigator
+参考：デジタル庁「ダッシュボードデザインの実践ガイドブック」
+静岡市実践データ活用プログラム向け成果物。管理は本事業の契約・運用ルールに従う。
+-->
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>静岡市実践データ活用プログラム｜ダッシュボード作成プロンプトナビ</title><style>
+:root{--p:#1557a0;--ink:#17212b;--muted:#586675;--line:#d6dee6;--bg:#f5f7f9;--ok:#16834a;--danger:#b42318;--focus:#ffbf47}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;line-height:1.65}.wrap{max-width:1180px;margin:auto;padding:22px}.hero{padding:32px;border-radius:18px;color:#fff;background:linear-gradient(130deg,#0d417b,#2878b8)}h1{margin:0 0 8px;line-height:1.3}.badges,.actions{display:flex;gap:8px;flex-wrap:wrap}.badge{padding:5px 10px;border:1px solid #ffffff66;border-radius:999px;background:#ffffff1f;font-size:13px;font-weight:700}.notice,.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;margin:16px 0}.notice{border-left:5px solid var(--p)}.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin:18px 0}.flow div{background:#fff;border:1px solid var(--line);padding:12px;border-radius:10px}.flow b{display:block;color:var(--p)}.layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(340px,.9fr);gap:18px;align-items:start}.sticky{position:sticky;top:10px}.sub,.hint{color:var(--muted);font-size:13px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field{margin:12px 0}.field label,.legend{display:block;font-weight:700;margin-bottom:5px}input[type=text],select,textarea{width:100%;padding:10px;border:1px solid #aeb9c4;border-radius:8px;background:#fff}textarea{min-height:86px;resize:vertical}input:focus,select:focus,textarea:focus,button:focus{outline:3px solid var(--focus);outline-offset:2px}.choice{display:flex;gap:9px;padding:10px;margin:8px 0;border:1px solid var(--line);border-radius:9px}.warning{padding:13px;border:1px solid #f0cf8b;border-radius:9px;background:#fff8ea}button{cursor:pointer;border:0;border-radius:8px;padding:10px 14px;font-weight:700}.primary{background:var(--p);color:#fff}.secondary{background:#fff;color:var(--p);border:1px solid var(--p)}.ghost{background:#eef1f4}.danger{background:#fff;color:var(--danger);border:1px solid #d92d20}.output{min-height:520px;font-family:ui-monospace,Consolas,"Noto Sans Mono CJK JP",monospace;font-size:13px}.progress{height:9px;border-radius:99px;background:#e4e9ee;overflow:hidden}.progress span{display:block;height:100%;width:0;background:var(--ok)}.row{display:flex;justify-content:space-between;font-weight:700}.status{min-height:24px;color:var(--ok);font-weight:700}.footer{font-size:12px;color:var(--muted);padding:15px 2px}@media(max-width:850px){.layout,.grid2,.flow{grid-template-columns:1fr}.sticky{position:static}.wrap{padding:12px}}
+</style></head><body><div class="wrap"><header class="hero"><h1>静岡市実践データ活用プログラム<br>ダッシュボード作成プロンプトナビ</h1><p>Excel VBA または Google スプレッドシート＋GASで、継続利用できるダッシュボードの要件整理とAI向けプロンプト作成を支援します。</p><div class="badges"><span class="badge">実践ワーク向け</span><span class="badge">未入力でも生成可能</span><span class="badge">VBA / GAS対応</span><span class="badge">ブラウザ内保存</span></div></header>
+<div class="notice"><b>利用時の注意：</b> 本ツールは設計支援用です。AIの提案や計算結果は自動的に正しいとは限りません。元データ、集計結果、表示内容を確認し、データの取り扱いは所属組織のルールに従ってください。</div>
+<div class="flow"><div><b>1 要件整理</b>分かる範囲で入力</div><div><b>2 プロンプト生成</b>実装指示を作成</div><div><b>3 AIへ貼り付け</b>許可された環境を利用</div><div><b>4 実装</b>成果物またはコード全量</div><div><b>5 実データテスト</b>数値・更新・表示を確認</div></div><div class="layout"><main>
+<section class="card"><h2>1. 実装方式</h2><p class="sub">可視化が軽微でも、継続利用のため主要処理をVBAまたはGASで実装します。</p><label class="choice"><input type="radio" name="platform" value="Excel VBA" checked><span><b>Excel VBA</b><br><span class="hint">可能なら .xlsm を優先。生成できない場合はVBAコード全量と導入手順を求めます。</span></span></label><label class="choice"><input type="radio" name="platform" value="Google スプレッドシート＋GAS"><span><b>Google スプレッドシート＋GAS</b><br><span class="hint">共有できない場合はGASコード全量、シート構成、導入手順を求めます。</span></span></label></section>
+<section class="card"><h2>2. 目的と利用場面</h2><p class="sub">すべて任意です。空欄はAIが「今回の仮定」として明示して補います。</p><div class="field"><label>会社・部署・業務の概要</label><textarea id="business" placeholder="例：製造業の生産管理。日次の生産実績と不良状況を管理"></textarea></div><div class="grid2"><div class="field"><label>Why：達成したいこと</label><textarea id="why" placeholder="例：不良の早期発見と手戻り削減"></textarea></div><div class="field"><label>What / So What：知りたいこと・判断</label><textarea id="what" placeholder="例：優先的に改善すべき工程を判断"></textarea></div></div><div class="grid2"><div class="field"><label>Who：主な利用者</label><input id="who" type="text" placeholder="例：工場長、製造リーダー"></div><div class="field"><label>When：利用タイミング</label><input id="when" type="text" placeholder="例：毎朝、週次会議前"></div></div><div class="grid2"><div class="field"><label>Where：場所・端末</label><input id="where" type="text" placeholder="例：事務所のノートPC"></div><div class="field"><label>見た後に取る行動</label><input id="action" type="text" placeholder="例：異常工程の担当者へ確認"></div></div><div class="field"><label>制約・更新条件</label><textarea id="constraints" placeholder="例：1画面、月次更新、外部接続不可"></textarea></div></section>
+<section class="card"><h2>3. データの渡し方</h2><label class="choice"><input type="radio" name="dataMode" value="実データを添付" checked><span><b>実データをチャットに添付</b><br><span class="hint">所属組織のルールで許可されている場合のみ利用してください。</span></span></label><label class="choice"><input type="radio" name="dataMode" value="列名だけ記載"><span><b>列名だけを記載</b></span></label><label class="choice"><input type="radio" name="dataMode" value="AIがサンプルデータを作成"><span><b>AIが架空のサンプルデータを作成</b></span></label><div class="field"><label>添付予定ファイル <span class="hint">端末内で選択。HTMLから送信されません</span></label><input id="file" type="file" multiple accept=".csv,.xlsx,.xls,.json,.txt"><div id="files" class="hint">未選択</div></div><div class="field"><label>列名・データ項目</label><textarea id="columns" placeholder="例：日付、製品コード、工程、生産数、不良数"></textarea></div><div class="field"><label>データの補足</label><textarea id="dataNotes" placeholder="例：1行が1日の製品別実績。欠損あり"></textarea></div><div class="warning"><b>データ保護：</b> 個人情報、顧客情報、契約・見積、機密情報などは、所属組織のルールに従ってアップロード可否を確認してください。必要に応じて匿名化・集約してください。</div></section>
+<section class="card"><h2>4. 表示内容とデザイン</h2><p class="sub">不明な項目は空欄で構いません。AIが目的・データから候補を提案します。</p><div class="grid2"><div class="field"><label>KPI・指標候補</label><textarea id="kpi" placeholder="例：生産数、不良率、前週比"></textarea></div><div class="field"><label>見たい切り口・グラフ</label><textarea id="views" placeholder="例：月別推移、工程別比較"></textarea></div></div><div class="grid2"><div class="field"><label>主な用途</label><select id="purpose"><option>目的・データから候補を提案</option><option>現状把握</option><option>異常・変化の早期把握</option><option>改善活動支援</option><option>意思決定支援</option><option>原因・差分の探索</option></select></div><div class="field"><label>継続利用の頻度</label><select id="frequency"><option>未定</option><option>毎日</option><option>毎週</option><option>毎月</option><option>四半期</option><option>年次</option><option>単発分析</option></select></div></div><div class="grid2"><div class="field"><label>ダッシュボード化の方針</label><select id="suitability"><option>妥当性を評価して提案</option><option>ダッシュボードとして作成</option><option>まず簡易版を作成</option></select></div><div class="field"><label>基調色</label><select id="palette"><option>目的・内容から候補を提案</option><option>青系</option><option>灰色系</option><option>緑系</option><option>オレンジ系</option><option>赤系</option></select></div></div><div class="field"><label>その他の希望</label><textarea id="extra" placeholder="例：印刷、フィルター、PDF出力、データ取込ボタン"></textarea></div></section></main>
+<aside class="sticky"><section class="card"><div class="row"><span>入力の充実度</span><span id="score">0%</span></div><div class="progress"><span id="bar"></span></div><p id="scoreText" class="sub">空欄でも生成できます。</p><div class="actions"><button id="generate" class="primary">プロンプトを生成</button><button id="copy" class="secondary">コピー</button><button id="download" class="ghost">保存</button><button id="reset" class="danger">クリア</button></div><div id="status" class="status" aria-live="polite"></div><label class="legend">生成プロンプト</label><textarea id="output" class="output" spellcheck="false"></textarea></section><section class="card"><h2>次にやること</h2><ol><li>生成プロンプトをコピー</li><li>所属組織で許可されたAIへ貼り付け</li><li>許可済みの場合のみ実データを添付</li><li>成果物またはコード全量と導入手順を受領</li><li>サンプルデータで動作確認</li><li>実データで数値、更新、表示を確認</li></ol></section></aside></div><footer class="footer">参考：デジタル庁「ダッシュボードデザインの実践ガイドブック」　｜　本ツールは本事業向けに作成した支援ツールです。</footer></div>
+<script>
+const ids=['business','why','what','who','when','where','action','constraints','columns','dataNotes','kpi','views','purpose','frequency','suitability','palette','extra'];const $=x=>document.getElementById(x),v=x=>$(x).value.trim(),r=n=>document.querySelector(`input[name="${n}"]:checked`).value,blank=x=>x||'（未入力：必要な仮定を【今回の仮定】として明示する）';function files(){return [...$('file').files].map(x=>x.name).join('、')||'未選択'}function score(){let n=['business','why','what','who','when','action','columns','kpi','views'].filter(x=>v(x)).length,p=Math.round(n/9*100);$('score').textContent=p+'%';$('bar').style.width=p+'%';$('scoreText').textContent=p<40?'空欄でも生成できます。仮定は明示されます。':p<80?'試作に十分です。':'実装条件がかなり明確です。';save()}function prompt(){const p=r('platform'),d=r('dataMode'),excel=p==='Excel VBA';return `あなたは${p}のダッシュボード開発者です。デジタル庁「ダッシュボードデザインの実践ガイドブック」で公開されている可視化原則を参考に、人の意思決定と行動を支援する成果物を作成してください。
+
+【重要方針】
+・仮定は【今回の仮定】として事実と区別する。安全性、権限、機密情報は推測しない。
+・PowerPointのプロトタイプは必須とせず、要件整理後、直接${p}で試作する。
+・関数だけで完結させず、取込、更新、集計、描画等を${excel?'VBA':'GAS'}で実装する。
+・${excel?'可能なら.xlsmを提供し、不可能なら制約、VBA全量、導入手順を提供する。':'可能なら完成状態のシートを提供し、不可能なら制約、シート構成、GAS全量、導入手順を提供する。'}
+
+【要件】
+業務：${blank(v('business'))}
+Why：${blank(v('why'))}
+What / So What：${blank(v('what'))}
+Who：${blank(v('who'))}
+When：${blank(v('when'))}
+Where：${blank(v('where'))}
+見た後の行動：${blank(v('action'))}
+制約：${blank(v('constraints'))}
+
+【データ】
+渡し方：${d}
+添付予定：${files()}
+列名：${blank(v('columns'))}
+補足：${blank(v('dataNotes'))}
+実データは型、件数、欠損、重複、表記揺れを確認する。サンプルは架空と明示する。
+
+【表示】
+KPI：${blank(v('kpi'))}
+切り口：${blank(v('views'))}
+用途：${v('purpose')}
+頻度：${v('frequency')}
+方針：${v('suitability')}
+基調色：${v('palette')}
+その他：${blank(v('extra'))}
+
+【設計・実装原則】
+・誰が何を知り、どの判断・行動をするかを優先する。
+・原則1画面、KPI4つ以内、主要グラフ2～4点。超える場合は理由を示して詳細へ分離する。
+・目的に合うグラフを選び、3D、過剰な色、不要な装飾、誤解を招く軸を避ける。色だけで状態を伝えない。
+・ダッシュボード化の妥当性も評価し、過剰な画面を避ける。
+・元データ、マスタ、集計、ダッシュボード、設定、操作説明を必要に応じて分離する。
+・更新操作、入力検証、日本語の処理結果・エラー、例外処理、日本語コメントを含める。
+・外部送信処理は明示的な許可・依頼がない限り実装しない。
+・コードは差し替え可能な全量で提供する。
+・仮定、KPI・グラフ・配色の理由、見方、更新方法、テスト結果、未解決事項、維持仕様を示す。
+・実データで集計照合、欠損、0件、大量行、日付境界、フィルター、再更新、エラー、権限を確認する。
+
+まず設計方針とダッシュボード化の妥当性を簡潔に示し、試作品の完成に進んでください。`}function generate(){$('output').value=prompt();$('status').textContent='生成しました。';save()}async function copy(){if(!$('output').value)generate();try{await navigator.clipboard.writeText($('output').value)}catch(e){$('output').select();document.execCommand('copy')}$('status').textContent='コピーしました。'}function download(){if(!$('output').value)generate();let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([$('output').value],{type:'text/plain;charset=utf-8'}));a.download='shizuoka_dashboard_prompt.txt';a.click();URL.revokeObjectURL(a.href)}function save(){let o={};ids.forEach(x=>o[x]=$(x).value);o.platform=r('platform');o.dataMode=r('dataMode');localStorage.setItem('shizuokaDashNavV5',JSON.stringify(o))}function load(){try{let o=JSON.parse(localStorage.getItem('shizuokaDashNavV5')||'{}');ids.forEach(x=>{if(o[x]!=null)$(x).value=o[x]});if(o.platform)document.querySelector(`input[name="platform"][value="${o.platform}"]`).checked=true;if(o.dataMode)document.querySelector(`input[name="dataMode"][value="${o.dataMode}"]`).checked=true}catch(e){}score()}function reset(){if(confirm('保存済み入力をクリアしますか？')){localStorage.removeItem('shizuokaDashNavV5');location.reload()}}document.querySelectorAll('input,textarea,select').forEach(x=>x.addEventListener('input',score));document.querySelectorAll('input[type=radio]').forEach(x=>x.addEventListener('change',score));$('file').addEventListener('change',()=>{$('files').textContent=files()});$('generate').onclick=generate;$('copy').onclick=copy;$('download').onclick=download;$('reset').onclick=reset;load();
+</script></body></html>
